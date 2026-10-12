@@ -1,0 +1,9 @@
+#!/bin/sh
+# Strips AI-tool attribution lines from commit messages.
+# Install: git config core.hooksPath hooks
+msg="$1"
+tmp="$msg.tmp.$$"
+grep -v -i -E '^[[:space:]]*(Co-Authored-By:[[:space:]]*Claude|(🤖[[:space:]]*)?Generated with \[?Claude Code|Claude-Session:)' "$msg" > "$tmp" || true
+# Drop trailing blank lines left behind.
+sed -e :a -e '/^\n*$/{$d;N;ba' -e '}' "$tmp" > "$msg"
+rm -f "$tmp"

@@ -1,0 +1,33 @@
+[package]
+name = "kinetra-license"
+description = "Kinetra license tokens: format, signing and verification. Shared by the Kinetra server and desktop app."
+version = "0.2.0"
+edition = "2024"
+rust-version = "1.94"
+license = "AGPL-3.0-only"
+publish = false
+
+[features]
+default = []
+# Signing (server and CLI only). The desktop app only needs verification.
+sign = []
+
+[dependencies]
+base64 = "0.23.1"
+ed25519-dalek = { version = "3.0.0", default-features = false, features = ["fast", "zeroize"] }
+serde = { version = "1.0.229", features = ["derive"] }
+serde_json = "1.0.151"
+sha2 = "0.11.0"
+thiserror = "2.0.21"
+
+[dev-dependencies]
+# Tests sign tokens; the app builds this crate without `sign`.
+kinetra-license = { path = ".", features = ["sign"] }
+proptest = "1.11.0"
+
+[lints.rust]
+unsafe_code = "forbid"
+
+[lints.clippy]
+unwrap_used = "warn"
+dbg_macro = "warn"

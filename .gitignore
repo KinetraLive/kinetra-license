@@ -1,0 +1,13 @@
+/target
+
+# Local assistant and working notes; never committed.
+CLAUDE.md
+.claude/
+*.log
+scratch/
+notes/
+HANDOFF*.md
+handoff*.md
+TODO.local.md
+.env
+.env.*
