@@ -5,6 +5,7 @@
 //! |---|---|
 //! | `core.app` | everyone, always (also with no license and offline): the whole local app |
 //! | `pro.ai`, `pro.cloud_sync`, `pro.polls`, `pro.team` | Pro plans, enterprise |
+//! | `pro.control` | cloud control (a browser controls the app through the server): paid and special plans, betas |
 //! | `business.*` | enterprise |
 //! | `pro.ndi`, `pro.sdi`, `pro.redundancy` | reserved: defined, not granted by any plan yet |
 //!
@@ -16,6 +17,8 @@ pub const PRO_AI: &str = "pro.ai";
 pub const PRO_CLOUD_SYNC: &str = "pro.cloud_sync";
 pub const PRO_POLLS: &str = "pro.polls";
 pub const PRO_TEAM: &str = "pro.team";
+/// Cloud control: the app can be controlled from a browser through the server.
+pub const PRO_CONTROL: &str = "pro.control";
 
 pub const PRO_NDI: &str = "pro.ndi";
 pub const PRO_SDI: &str = "pro.sdi";
@@ -38,6 +41,7 @@ pub const ALL: &[&str] = &[
     PRO_CLOUD_SYNC,
     PRO_POLLS,
     PRO_TEAM,
+    PRO_CONTROL,
     PRO_NDI,
     PRO_SDI,
     PRO_REDUNDANCY,
@@ -62,6 +66,7 @@ mod tests {
         sorted.sort_unstable();
         sorted.dedup();
         assert_eq!(sorted.len(), ALL.len(), "duplicates in ALL");
+        assert!(is_known(PRO_CONTROL) && !RESERVED.contains(&PRO_CONTROL));
         assert!(!is_known("pro.studio_mode"));
     }
 }
